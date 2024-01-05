@@ -1,22 +1,25 @@
 package org.example.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 
-@Table
+@Table(name = "player_table")
 public class Player {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int playerId;
+
+    @Column(nullable = false, name = "name")
     private String playerName;
     private String teamName;
     private int age;
     public Player(){
 
     }
+
+
 
     public int getPlayerId() {
         return playerId;
@@ -66,5 +69,7 @@ public class Player {
         this.teamName = teamName;
         this.age = age;
     }
+    
+   
 
 }

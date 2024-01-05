@@ -6,6 +6,9 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
+
+import java.util.List;
 
 
 public class Main {
@@ -21,16 +24,15 @@ public class Main {
             Session session = factory.openSession();
             Transaction transaction = session.beginTransaction();
 
-//            Player p1 = new Player(4, "Akzhol", "Osh", 26);
-//            Player p2 = new Player(5, "Bek", "Bishkek", 25);
-//            Player p3 = new Player(6, "Ali", "Jalal-Abad", 26);
-//
-//            session.save(p1);
-//            session.save(p2);
-//            session.save(p3);
 
-            Player p = session.get(Player.class, 1);
-           session.delete(p);
+
+            Query query = session.createQuery("from Player where playerId = : Id");
+            query.setString("Id", "1");
+            List<Player> playerList = query.list();
+            System.out.println("Player details: ");
+            for(Player p: playerList){
+                System.out.println(p);
+            }
 
             transaction.commit();
             session.close();

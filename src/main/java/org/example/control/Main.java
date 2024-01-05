@@ -29,7 +29,6 @@ public class Main {
             Query query = session.createQuery("from Player where playerId = : Id");
             query.setString("Id", "1");
             List<Player> playerList = query.list();
-            System.out.println("Player details: ");
             for(Player p: playerList){
                 System.out.println(p);
             }
